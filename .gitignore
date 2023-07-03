@@ -1,52 +1,34 @@
-# Prerequisites
-*.d
+#include <stdio.h>
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+// Функція для знаходження найбільшого спільного дільника (НСД)
+int gcd(int a, int b) {
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
+}
 
-# Linker output
-*.ilk
-*.map
-*.exp
+// Функція для знаходження найменшого спільного кратного (НСК)
+int lcm(int a, int b) {
+    return (a * b) / gcd(a, b);
+}
 
-# Precompiled Headers
-*.gch
-*.pch
+int main() {
+    int n;
+    printf("Введіть кількість чисел: ");
+    scanf("%d", &n);
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+    int numbers[n];
+    printf("Введіть числа, розділені пробілом: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &numbers[i]);
+    }
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+    int result = numbers[0];
+    for (int i = 1; i < n; i++) {
+        result = lcm(result, numbers[i]);
+    }
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+    printf("Найменше спільне кратне: %d\n", result);
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+    return 0;
+}
